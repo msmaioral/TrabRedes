@@ -1,29 +1,51 @@
 .container{
+  border: 2px solid white;
   background-color: brown;
-  height: 789px;
-  overflow: hidden;
+  height: 789px; 
+
+  
 }
 .App {
   text-align: center;
-  background-color: rgba(172, 172, 41, 0.4);
+  background-color: rgba(3, 9, 43, 0.822);
+}
+.menu-group{
+  position: relative;
+  left: -15px;
+  width: 1136px;
+  height: 20%;
+  background-color:rgba(10, 10, 10, 0.822);
+  margin-bottom: 200px;
+  box-sizing: content-box;
+  border-bottom: 7px solid white;
 }
 .alert{
-  position: relative;
   cursor: pointer;
   margin: 40px auto;
   width: 50%;
 }
 
 .Viewer{
+  display: inline-block;
   width: 60%;
-  margin:20px auto;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+  margin-bottom: 100px;
   border: 1px solid #eee;
   box-shadow: 0 2px 3px #ccc;
   padding: 16px;
   text-align: center;
-  overflow: hidden;
   background-color: rgba(255,255,255,0.4);
+  position: relative;
+  top: 15px;
 }
 .alert:hover{
   background-color: rgba(255,255,255,0.8);
+}
+img{
+  position: relative;
+  left: -80px;
+  width: 150px;
+  height: 150px;
 }
