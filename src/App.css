@@ -1,15 +1,16 @@
 html,body{
-  width: 100%;
-  height: 100%;
+  min-height: 100%;
+  background-color: rgb(14, 22, 63);
 }
 .App {
+  min-height: 100%;
   text-align: center;
-  background-color: rgba(3, 9, 43, 0.822);
+  background-color: rgb(14, 22, 63);
 }
 .main{
   border: 2px solid white;
   background-color: brown;
-  height: 789px; 
+  height: 100%; 
   box-sizing: border-box;
 }
 .menu-group{
@@ -48,6 +49,15 @@ html,body{
 }
 .clear{
   clear: both;
+}
+.footer{
+  background-color: black;
+  width: 100%;
+  height: 20%;
+}
+.spacer{
+  color: blue;
+  margin-bottom: 10%;
 }
 
 @media only screen and (max-width: 768px) {
