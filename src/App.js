@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 import QrReader from 'react-qr-reader'
 import 'react-html5-camera-photo/build/css/index.css';
-import { highlightTrailingWhitespace } from 'jest-matcher-utils';
 // import Webcam from "react-webcam";
 // import Camera from 'react-html5-camera-photo';
 
@@ -17,8 +16,15 @@ class App extends Component {
     prato : null,
     horario : null
   },
+    saida:{
+    NmrPilastra : null ,
+    diaSemana : null,
+    prato : null,
+    horario : null
+    },
     verifyAlteracao : false,
     verifyCamera :false,
+    verifySolicitacao:false,
     verifyEnvio : false,
     result : null
   }
@@ -39,11 +45,16 @@ class App extends Component {
       verifyCamera: !this.state.verifyCamera
     })
   }
+  handleSolicitacao = () =>{
+    this.setState({
+      verifySolicitacao: !this.state.verifySolicitacao
+    })
+  }
 
 
   enviarInfo = () =>{
     
-    axios.get('https://teste2-46731.firebaseio.com/CardapioDia.json')
+    axios.get('https://pratodia-01.firebaseio.com/PratoDia.json')
     .then(response =>{
       const date = new Date()
       const dias = ['Domingo','Segunda','Terca','Quarta','Quinta','Sexta','Sabado']
@@ -66,21 +77,26 @@ class App extends Component {
 
   solicitarInfo = () =>{
 
-    axios.get('https://react-test-7f727.firebaseio.com/.json')
+    axios.get('https://ruviewer-1.firebaseio.com/.json')
     .then(response =>{
-      console.log(response.data)
+      // console.log(response.data)
+      let array = Object.keys(response.data).map(key=> response.data[key]);
+      this.setState({
+        saida: array[array.length - 1],
+        verifySolicitacao:true
+      })
+      // console.log(this.state.saida)
     })
     .catch(error=>{
       console.log(error)
     });
-
   }
   render() {
     if(this.state.verifyAlteracao){
-      console.log(this.state.entrada)
-      axios.post('https://react-test-7f727.firebaseio.com/.json',this.state.entrada)
+      // console.log(this.state.entrada)
+      axios.post('https://ruviewer-1.firebaseio.com/.json',this.state.entrada)
       .then(response =>{
-        console.log(response)
+        // console.log(response)
         this.setState({
           result : null,
           verifyAlteracao : false,
@@ -93,7 +109,7 @@ class App extends Component {
       })
     }
     let main
-    if(this.state.verifyCamera==true){
+    if(this.state.verifyCamera && !this.state.verifySolicitacao){
       main = (
         <div>
         <div className="alert alert-warning" onClick={this.handleCamera}>Voltar</div>
@@ -105,16 +121,26 @@ class App extends Component {
           />
         </div>
       )
-    }else{
+    }else if(!this.state.verifyCamera & !this.state.verifySolicitacao){
       main = (
         <div>
         <div className="menu-group container">
-            <img className="logo" src='logo_ufpa.png' alt="ufpa.png"></img>
-            <div className="Viewer"><h1>RU Viewer</h1></div>
+            <img className="logo-ufpa" src='logo_ufpa.png' alt="ufpa.png"></img>
+            <img className="logo" src="logoViewer5.png" alt="logoViewer.png"></img>
             </div>
             <div className="alert alert-warning" onClick={this.handleCamera}>Quero colaborar</div>
             <div className="alert alert-warning " onClick={this.solicitarInfo}>Quero me informar</div>
             <div className="spacer"></div>
+        </div>
+      )
+    }else if(!this.state.verifyCamera && this.state.verifySolicitacao){
+      main = (
+        <div>
+          <div className="alert alert-warning" onClick={this.handleSolicitacao}>Voltar</div>
+          <div className="response">
+          <p>A fila esta na pilastra : {this.state.saida.NmrPilastra}</p>
+          <p>Útilma atualização feita {this.state.saida.diaSemana} ás {this.state.saida.horario} para o prato {this.state.saida.prato}</p>
+          </div>
         </div>
       )
     }
@@ -128,6 +154,7 @@ class App extends Component {
       this.handleCamera()
     }
 
+    
     return (
       <div className="App">
         <div className="container main">

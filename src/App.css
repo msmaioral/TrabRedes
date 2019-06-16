@@ -34,10 +34,17 @@ html,body{
   position: relative;
   top: 35px;
 }
-.logo{
+.logo-ufpa{
   margin-right: 10%;
   width: 150px;
   height: 150px;
+}
+.logo{
+  margin: 20px auto;
+  width: 60%;
+  height: 150px;
+  border: 2px solid white;
+  border-radius: 10px;
 }
 .alert{
   cursor: pointer;
@@ -59,13 +66,22 @@ html,body{
   color: blue;
   margin-bottom: 10%;
 }
+.response{
+  margin-bottom: 10%;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  padding: 16px;
+  text-align: center;
+  background-color: rgba(255,255,255,0.7);
+  font-weight: bold;
+}
 
 @media only screen and (max-width: 768px) {
   .main{
     overflow: hidden;
     box-sizing: border-box;
   }
-  .logo{
+  .logo-ufpa{
     display: block;
     margin: 0 auto;
   }
